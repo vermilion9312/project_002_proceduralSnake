@@ -16,20 +16,12 @@
 </body>
 <script>
     function init() {
-        const $canvas = document.querySelector("#snake");
-        const ctx = $canvas.getContext("2d");
- 
         
-        $canvas.width = boardSize;
-        $canvas.height = boardSize;
         
     };
 
+    
     function drawBoard() {
-        const tileSize = 30;
-        const tileCount = 17;
-        const boardSize = tileCount * tileSize;
-        
         let k = 0;
         for (let i = 0; i < tileCount; i++) {
             for (let j = 0; j < tileCount; j++) {
@@ -40,14 +32,43 @@
                     ctx.fillStyle = "rgb(162, 209, 73)";
                     ctx.fillRect(i * tileSize, j * tileSize, tileSize, tileSize);
                 };
+                k++;
             };
-            k++;
         };
     };
+
+    function drawApple() {
+        const appleX = Math.floor(Math.random() * (tileCount + 1));
+        const appleY = Math.floor(Math.random() * (tileCount + 1));
+
+        ctx.fillStyle = "rgb(231, 71, 29)";
+        ctx.fillRect(appleX * tileSize, appleY * tileSize, tileSize, tileSize);
+      
+    };
+
+    function drawSnake() {
+        const snakeLength = 3;
+        const snakeX = 2;
+        const snakeY = parseInt(tileCount / 2);
+
+        ctx.fillStyle = "rgb(70, 116, 233)";
+        ctx.fillRect(snakeX * tileSize, snakeY * tileSize, tileSize, tileSize)
+    };
+
+    const $canvas = document.querySelector("#snake");
+    const ctx = $canvas.getContext("2d");
     
+    const tileSize = 30;
+    const tileCount = 17;
+    const boardSize = tileCount * tileSize;
+    
+    $canvas.width = boardSize;
+    $canvas.height = boardSize;
 
-
-    setInterval(drawBoard, 100);
+    // setInterval(drawBoard, 100);
+    drawBoard();
+    drawApple();
+    drawSnake();
     init();
 
 </script>
